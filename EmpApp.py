@@ -1,3 +1,4 @@
+from crypt import methods
 from flask import Flask, render_template, request
 from pymysql import connections
 import os
@@ -25,10 +26,29 @@ table = 'employee'
 def home():
     return render_template('AddEmp.html')
 
+@app.route("/viewAllEmp", methods=['GET', 'POST'])
+def home():
+    return render_template('ViewAllEmp.html')
 
 @app.route("/about", methods=['POST'])
 def about():
     return render_template('www.intellipaat.com')
+
+@app.route("/getallemp", methods=['GET'])
+def GetEmp():
+    employees = []
+    try:
+        cursorObject = db_conn.cursor()                                     
+        sqlQuery = "select * from employee"
+        cursorObject.execute(sqlQuery)
+        employees = cursorObject.fetchall()
+    except Exception as e:
+        return str(e)
+    finally:
+        cursorObject.close()
+
+    return render_template('ViewAllEmp.html', employees=employees)
+    
 
 
 @app.route("/addemp", methods=['POST'])
