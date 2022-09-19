@@ -16,7 +16,6 @@ db_conn = connections.Connection(
     user=customuser,
     password=custompass,
     db=customdb
-
 )
 output = {}
 table = 'employee'
@@ -25,10 +24,6 @@ table = 'employee'
 @app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template('AddEmp.html')
-
-@app.route("/viewAllEmp", methods=['GET', 'POST'])
-def home():
-    return render_template('ViewAllEmp.html')
 
 @app.route("/about", methods=['POST'])
 def about():
@@ -48,8 +43,6 @@ def GetEmp():
         cursorObject.close()
 
     return render_template('ViewAllEmp.html', employees=employees)
-    
-
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
