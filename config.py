@@ -1,8 +1,8 @@
 customhost = "employee.cvizqxos8p8v.us-east-1.rds.amazonaws.com"
-customuser = "aws_user"
-custompass = "Bait3273"
+customuser = "admin"
+custompass = "admin12345"
 customdb = "employee"
-custombucket = "lowchoonkeat-employee"
+custombucket = "limjiazhe-bucket"
 customregion = "us-east-1"
 aws_access_key_id=ASIAVC3M4HO65CC4ENY3
 aws_secret_access_key=GCSYKKE3B49Dvqt4rpsfOpKouraTed3sCALsbAlK
