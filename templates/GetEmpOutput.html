@@ -2,6 +2,29 @@
 <html>
 <head>
 	<title>Employee Information</title>
+	<style>
+        #employees {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+        }
+        
+        #employees td, #employees th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        #employees tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #employees tr:hover {background-color: #ddd;}
+        
+        #employees th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #04AA6D;
+          color: white;
+        }
+    </style>
 </head>
 <center>
 	<font color="black" size="5" style="font-family: avenir">
@@ -11,22 +34,44 @@
 		<body bgcolor="lightgrey">
 
 			<form>
+				<table style="width: 70%;">
+					<colgroup>
+						<col style="width:30%;">
+						<col style="width:70%;">
+					</colgroup>
+					<tr>
+						<td>Profile</td>
+						<td>
+							<div style="width:100%;">
+								<img src="{{ employee[5] }}" style="object-fit:contain;"  width="100%"/> 
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>Employee ID</td>
+						<td>{{ employee[0] }} </td>
+					</tr>
+					<tr>
+						<td>First Name</td>
+						<td>{{ employee[1] }} </td>
+					</tr>
+					<tr>
+						<td>Last Name</td>
+						<td>{{ employee[2] }} </td>
+					</tr>
+					<tr>
+						<td>Primary Interest</td>
+						<td>{{ employee[3] }} </td>
+					</tr>
+					<tr>
+						<td>Location</td>
+						<td>{{ employee[4] }} </td>
+					</tr>
+				</table>
 
 				<div>
 
-			  		Employee ID:<br> {{ id }} <br><br>
-
-			  		First Name:<br> {{ fname }} <br><br>
-
-			  		Last Name:<br> {{ lname }} <br><br>
-
-			  		Primary Interest:<br> {{ interest }} <br><br>
-
-			  		Location:<br> {{ location }} <br><br>
-
-			  		Image URL: <br> {{ image_url }} <br><br>
-
-			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="http://3.134.115.108:80/getemp">RESET</button><br><br>
+			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="/getallemp">BACK</button><br><br>
 
 			  	</div>
 
