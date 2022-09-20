@@ -39,8 +39,9 @@
                     <col style="width:5%;">
                     <col style="width:15%;">
                     <col style="width:15%;">
-                    <col style="width:25%;">
-                    <col style="width:25%;">
+                    <col style="width:20%;">
+                    <col style="width:20%;">
+                    <col style="width:10%;">
                 </colgroup>
                 <tr>
                     <th>Profile Picture</th>
@@ -49,6 +50,7 @@
                     <th>Last Name</th>
                     <th>Primary Skills</th>
                     <th>Location</th>
+                    <th>Action</th>
                 </tr>
                 {% if employees %}
                     <h5>Number of Employees: {{ employees|length }}</h5>
@@ -64,6 +66,11 @@
                             <td>{{ employee[2] }}</td>
                             <td>{{ employee[3] }}</td>
                             <td>{{ employee[4] }}</td>
+                            <td>
+                                <a href="http://107.20.14.103/getemp?id={{ employee[0] }}" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">
+                                    VIEW
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                 {% else %}
