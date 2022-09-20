@@ -37,7 +37,7 @@ def about():
     return render_template('www.intellipaat.com')
 
 @app.route("/getallemp", methods=['GET', 'POST'])
-def GetEmp():
+def GetAllEmp():
     employees = []
     try:
         cursorObject = db_conn.cursor()                                     
@@ -52,6 +52,27 @@ def GetEmp():
         
 
     return render_template('ViewAllEmp.html', employees=employees)
+
+@app.route("/getemp", methods=['GET'])
+def GetEmp():
+    id = request.args.get("id")
+
+    if id:
+        try:
+            cursorObject = db_conn.cursor()                                     
+            sqlQuery = "select * from employee where emp_id = " + id
+            cursorObject.execute(sqlQuery)
+            employee = cursorObject.fetchone()
+
+        except Exception as e:
+            return str(e)
+        finally:
+            cursorObject.close()
+    else:
+        GetAllEmp()
+
+    return render_template('GetEmpOutput.html', employee=employee)
+
 
 @app.route("/addemp", methods=['POST'])
 def AddEmp():
