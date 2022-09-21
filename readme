@@ -3,7 +3,6 @@
 
 su - ec2-user
 #!/bin/bash
-sudo su
 sudo yum update -y
 sudo yum install git -y
 git clone https://github.com/yctan1115/AWSClould.git
