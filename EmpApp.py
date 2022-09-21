@@ -6,12 +6,6 @@ import boto3
 from config import *
 import re
 
-boto3_session = boto3.Session(
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    aws_session_token=AWS_SESSION_TOKEN
-)
-
 app = Flask(__name__)
 
 bucket = custombucket
@@ -93,10 +87,10 @@ def AddEmp():
         print("Data inserted in MySQL RDS... uploading image to S3...")
         # Uplaod image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file" + "-" + emp_image_file.filename
-        s3 = boto3_session.resource('s3')
+        s3 = boto3.resource('s3')
 
         s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
-        bucket_location = boto3_session.client('s3').get_bucket_location(Bucket=custombucket)
+        bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
         s3_location = (bucket_location['LocationConstraint'])
 
         if s3_location is None:
@@ -125,4 +119,4 @@ def AddEmp():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True) 
