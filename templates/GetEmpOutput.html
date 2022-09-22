@@ -1,84 +1,172 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Employee Information</title>
-	<style>
-        #employees {
-          font-family: Arial, Helvetica, sans-serif;
-          border-collapse: collapse;
-        }
-        
-        #employees td, #employees th {
-          border: 1px solid #ddd;
-          padding: 8px;
-        }
-        
-        #employees tr:nth-child(even){background-color: #f2f2f2;}
-        
-        #employees tr:hover {background-color: #ddd;}
-        
-        #employees th {
-          padding-top: 12px;
-          padding-bottom: 12px;
-          text-align: left;
-          background-color: #04AA6D;
-          color: white;
+	<title>List Employee</title>
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        .table > tbody > tr > td {
+            vertical-align: middle;
         }
     </style>
 </head>
-<center>
-	<font color="black" size="5" style="font-family: avenir">
-
-		<h1 style="color: DodgerBlue">Employee Information</h1>
-
-		<body bgcolor="lightgrey">
-
-			<form>
-				<table style="width: 70%;">
-					<colgroup>
-						<col style="width:30%;">
-						<col style="width:70%;">
-					</colgroup>
-					<tr>
-						<td>Profile</td>
-						<td>
-							<div style="width:100%;">
-								<img src="{{ employee[5] }}" style="object-fit:contain;"  width="100%"/> 
+    <body>
+        <div class="container-fluid px-5 py-5">
+			<div class="card">
+				<div class="card-body">
+					<div class="d-flex justify-content-between">
+						<div>
+							<h5 class="card-title">View/Edit Employee</h5>
+							<h6 class="card-subtitle mb-2 text-muted">*Please view and edit employee details at the form below</h6>
+						</div>
+						<div>
+							<a href="/getallemp" class="btn btn-primary">Back</a>
+						</div>
+					</div>
+					<div class="d-flex justify-content-center">
+						<div style="width:30%;" class="py-4">
+							<img src="{{ employee[5] }}" width="100%" style="object-fit:contain;"/>
+						</div>
+					</div>
+					
+					<form action="/updateemp?id={{employee[0]}}" autocomplete="on" method = "POST" enctype="multipart/form-data">
+						<div class="row">
+							<div></div>
+							<div class="col-12">
+								<div class="form-floating mb-3">
+									<input type="number" class="form-control" id="emp_id" name="emp_id" disabled value="{{ employee[0] }}">
+									<label for="emp_id">Employee ID</label>
+								</div>
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<td>Employee ID</td>
-						<td>{{ employee[0] }} </td>
-					</tr>
-					<tr>
-						<td>First Name</td>
-						<td>{{ employee[1] }} </td>
-					</tr>
-					<tr>
-						<td>Last Name</td>
-						<td>{{ employee[2] }} </td>
-					</tr>
-					<tr>
-						<td>Primary Interest</td>
-						<td>{{ employee[3] }} </td>
-					</tr>
-					<tr>
-						<td>Location</td>
-						<td>{{ employee[4] }} </td>
-					</tr>
-				</table>
+							<div class="col-6">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="first_name" name="first_name" value="{{ employee[1] }}">
+									<label for="first_name">First Name</label>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="last_name" name="last_name" value="{{ employee[2] }}">
+									<label for="last_name">Last Name</label>
+								</div>
+							</div>
+							<div class="col-12 pb-3">
+								<div class="form-floating">
+									<select class="form-select" id="pri_skill" name="pri_skill" aria-label="Floating label select example" value="{{ employee[3] }}">
+										{% if employee[3] == "Communication" %}
+											<option selected value="Communication">Communication</option>
+											<option value="Problem Solving">Problem Solving</option>
+											<option value="Time Management">Time Management</option>
+											<option value="Logical Thinking">Logical Thinking</option>
+											<option value="Teamwork">Teamwork</option>
+											<option value="Leadership">Leadership</option>
+											<option value="Creativity">Creativity</option>
+											<option value="Project Management">Project Management</option>
+										{% elif employee[3] == "Problem Solving" %}
+											<option value="Communication">Communication</option>
+											<option selected value="Problem Solving">Problem Solving</option>
+											<option value="Time Management">Time Management</option>
+											<option value="Logical Thinking">Logical Thinking</option>
+											<option value="Teamwork">Teamwork</option>
+											<option value="Leadership">Leadership</option>
+											<option value="Creativity">Creativity</option>
+											<option value="Project Management">Project Management</option>
+										{% elif employee[3] == "Time Management" %}
+											<option value="Communication">Communication</option>
+											<option value="Problem Solving">Problem Solving</option>
+											<option selected value="Time Management">Time Management</option>
+											<option value="Logical Thinking">Logical Thinking</option>
+											<option value="Teamwork">Teamwork</option>
+											<option value="Leadership">Leadership</option>
+											<option value="Creativity">Creativity</option>
+											<option value="Project Management">Project Management</option>
+										{% elif employee[3] == "Logical Thinking" %}
+											<option value="Communication">Communication</option>
+											<option value="Problem Solving">Problem Solving</option>
+											<option value="Time Management">Time Management</option>
+											<option selected value="Logical Thinking">Logical Thinking</option>
+											<option value="Teamwork">Teamwork</option>
+											<option value="Leadership">Leadership</option>
+											<option value="Creativity">Creativity</option>
+											<option value="Project Management">Project Management</option>
+										{% elif employee[3] == "Teamwork" %}
+											<option value="Communication">Communication</option>
+											<option value="Problem Solving">Problem Solving</option>
+											<option value="Time Management">Time Management</option>
+											<option value="Logical Thinking">Logical Thinking</option>
+											<option selected value="Teamwork">Teamwork</option>
+											<option value="Leadership">Leadership</option>
+											<option value="Creativity">Creativity</option>
+											<option value="Project Management">Project Management</option>
+										{% elif employee[3] == "Leadership" %}
+											<option value="Communication">Communication</option>
+											<option value="Problem Solving">Problem Solving</option>
+											<option value="Time Management">Time Management</option>
+											<option value="Logical Thinking">Logical Thinking</option>
+											<option value="Teamwork">Teamwork</option>
+											<option selected value="Leadership">Leadership</option>
+											<option value="Creativity">Creativity</option>
+											<option value="Project Management">Project Management</option>
+										{% elif employee[3] == "Creativity" %}
+											<option value="Communication">Communication</option>
+											<option value="Problem Solving">Problem Solving</option>
+											<option value="Time Management">Time Management</option>
+											<option value="Logical Thinking">Logical Thinking</option>
+											<option value="Teamwork">Teamwork</option>
+											<option value="Leadership">Leadership</option>
+											<option selected value="Creativity">Creativity</option>
+											<option value="Project Management">Project Management</option>
+										{% elif employee[3] == "Project Management" %}
+											<option value="Communication">Communication</option>
+											<option value="Problem Solving">Problem Solving</option>
+											<option value="Time Management">Time Management</option>
+											<option value="Logical Thinking">Logical Thinking</option>
+											<option value="Teamwork">Teamwork</option>
+											<option value="Leadership">Leadership</option>
+											<option value="Creativity">Creativity</option>
+											<option selected value="Project Management">Project Management</option>
+										{% endif %}
+									</select>
+									<label for="pri_skill">Primary Skill</label>
+								</div>
+							</div>
+							<div class="col-12 pb-3">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="location" name="location" value="{{ employee[4] }}">
+									<label for="location">Location</label>
+								</div>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+							Remove
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
 
-				<div>
+		<div class="modal fade" tabindex="-1" id="exampleModal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Remove Employee?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you want to remove the employee?</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <a href="/removeemp?id={{ employee[0] }}" class="btn btn-danger">Remove</a>
+                </div>
+              </div>
+            </div>
+        </div>
 
-			  		<button type="submit" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;" formaction="/getallemp">BACK</button><br><br>
+        <!--Bootstrap-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
-			  	</div>
-
-			</form>
-
-		</body>
-
-	</font>
-</center>
+    </body>
 </html>
