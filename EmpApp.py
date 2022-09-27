@@ -3,6 +3,12 @@ from flask import Flask, render_template, request
 from pymysql import connections
 import os
 import boto3
+from botocore.client import Config as BotoConfig
+
+TIMEOUT = 3
+config = BotoConfig(connect_timeout=TIMEOUT, retries={"mode": "standard"})
+client = boto3.client("s3", config=config)
+
 from config import *
 import re
 
@@ -222,4 +228,4 @@ def AddEmp():
     return render_template('AddEmpOutput.html', name=emp_name)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=True) 
+    app.run(host='0.0.0.0', port=80, debug=True)
